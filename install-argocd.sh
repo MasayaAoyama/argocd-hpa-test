@@ -9,3 +9,5 @@ echo "please visit http://localhost:80"
 
 kubectl apply -f app.yaml
 
+# if following config is enabled, HPA is always pass health status
+# kubectl apply -f -patched-argocd-cm.yaml
