@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-hpa-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+      - name: tools-container
+        image: amsy810/tools:v2.0
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 100m
+        readinessProbe:
+          exec:
+            command: ["ls", "/readiness.txt"]
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
+          periodSeconds: 3
